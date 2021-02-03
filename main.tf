@@ -3,11 +3,11 @@ provider "aws" {
 }
 
 resource "aws_key_pair" "aws-ubuntu" {
-    key_name = var.key_name
+    key_name = var.key_pair_name
     public_key = var.public_key
 }
 
-resource "aws_security_group" "ubuntu-sg" {
+resource "aws_security_group" "aws-ubuntu-sg" {
     ingress {
         from_port = 0
         to_port = 0
@@ -36,7 +36,7 @@ resource "aws_security_group" "ubuntu-sg" {
         cidr_blocks = ["0.0.0.0/0"]
     }
 
-    egrass {
+    egress {
         cidr_blocks = ["0.0.0.0/0"]
         from_port = 0
         to_port = 0
@@ -44,11 +44,11 @@ resource "aws_security_group" "ubuntu-sg" {
     }
 }
 
-resource "aws_instace" "ubuntu-worker" {
+resource "aws_instance" "aws-ubuntu-worker" {
     ami = var.ami
     instance_type = var.instance_type
-    key_name = var.key_name
+    key_name = var.key_pair_name
     count = 1
     tags = var.instance_tags
-    security_groups = [aws_security_group.ubuntu-sg]
+    security_groups = [aws_security_group.aws-ubuntu-sg.name]
 }
