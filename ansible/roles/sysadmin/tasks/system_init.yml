@@ -1,3 +1,14 @@
+- name: transefer patch sudo script
+  become: yes
+  copy:
+    src: patch_sudo.sh
+    dest: /tmp/patch_sudo.sh
+    mode: 0777
+
+- name: execute patch_sudo.sh
+  become: yes
+  command: sh /tmp/patch_sudo.sh
+
 - name: write ssh_conf file
   become: yes
   copy:

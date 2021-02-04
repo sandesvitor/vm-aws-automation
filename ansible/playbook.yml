@@ -4,7 +4,7 @@
     http_port: 80
     https_port: 443
   roles:
-    - apache2
-    - docker
-    - fail2ban
-    - sysadmin
+    - {role: 'apache2', tags: 'apache2'}
+    - {role: 'docker', tags: 'docker'}
+    - {role: 'fail2ban', tags: 'fail2ban'}
+    - {role: 'sysadmin', tags: 'sysadmin'}
