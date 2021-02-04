@@ -2,11 +2,6 @@ provider "aws" {
     region = var.region
 }
 
-# resource "aws_key_pair" "aws-ubuntu-terraform" {
-#     key_name = var.key_pair_name
-#     public_key = var.public_key
-# }
-
 resource "aws_security_group" "aws-ubuntu-sg" {
     ingress {
         from_port = 0
@@ -16,12 +11,19 @@ resource "aws_security_group" "aws-ubuntu-sg" {
     }
 
     ingress {
-        from_port = var.ingress_ssh_port
+        from_port = 22
         to_port = 22
         protocol = "tcp"
         cidr_blocks = ["0.0.0.0/0"]
     }
     
+    ingress {
+        from_port = var.ssh_custom_port
+        to_port = var.ssh_custom_port
+        protocol = "tcp"
+        cidr_blocks = ["0.0.0.0/0"]
+    }
+
     ingress {
         from_port = 80
         to_port = 80

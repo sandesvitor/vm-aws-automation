@@ -4,3 +4,4 @@ terraform.tfvars
 .terraform.lock.hcl
 terraform.plan.out
 ansible/roles/fail2ban/files/jail.local
+ansible/roles/sysadmin/files/sshd_config

@@ -32,7 +32,6 @@ variable "instance_tags" {
 }
 
 
-variable  "ingress_ssh_port" {
+variable  "ssh_custom_port" {
   type        = number
-  default     = 22
 }
