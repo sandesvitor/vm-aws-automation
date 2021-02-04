@@ -1,0 +1,46 @@
+<IfModule mod_ssl.c>
+
+<VirtualHost *:443>
+ServerName galere.se
+ServerAlias www.galere.se
+DocumentRoot /var/www/galere
+ErrorLog /var/log/apache2/galere.se.d/error.log
+CustomLog /var/log/apache2/galere.se.d/access.log combined
+<Directory /var/www/galere/>
+	AllowOverride All
+</Directory>
+Include /etc/letsencrypt/options-ssl-apache.conf
+SSLCertificateFile /etc/letsencrypt/live/galere.se/fullchain.pem
+SSLCertificateKeyFile /etc/letsencrypt/live/galere.se/privkey.pem
+</VirtualHost>
+
+<VirtualHost *:443>
+ServerName jonarius.galere.se
+ErrorLog /var/log/apache2/jonarius.galere.se.d/error.log
+CustomLog /var/log/apache2/jonarius.galere.se.d/access.log combined
+ProxyPass / https://jonarius.herokuapp.com/
+ProxyPassReverse / https://jonarius.herokuapp.com/
+SSLProxyEngine on
+Include /etc/letsencrypt/options-ssl-apache.conf
+SSLCertificateFile /etc/letsencrypt/live/galere.se/fullchain.pem
+SSLCertificateKeyFile /etc/letsencrypt/live/galere.se/privkey.pem
+</VirtualHost>
+
+<VirtualHost *:443>
+ServerName jenkins.dev.galere.se
+ErrorLog /var/log/apache2/jenkins.dev.galere.se.d/error.log
+CustomLog /var/log/apache2/jenkins.dev.galere.se.d/access.log combined
+ProxyPass / https://localhost:8443/ nocanon
+ProxyPassReverse / http://localhost:8443/
+RequestHeader set X-Forwarded-Proto "https"
+RequestHeader set X-Forwarded-Port "443"
+AllowEncodedSlashes NoDecode
+SSLProxyEngine on
+SSLProxyVerify none
+SSLProxyCheckPeerCN off
+Include /etc/letsencrypt/options-ssl-apache.conf
+SSLCertificateFile /etc/letsencrypt/live/galere.se/fullchain.pem
+SSLCertificateKeyFile /etc/letsencrypt/live/galere.se/privkey.pem
+</VirtualHost>
+
+</IfModule>

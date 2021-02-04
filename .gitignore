@@ -2,3 +2,5 @@
 terraform.tfvars
 .terraform
 .terraform.lock.hcl
+terraform.plan.out
+ansible/roles/fail2ban/files/jail.local

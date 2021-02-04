@@ -1,0 +1,14 @@
+<VirtualHost *:80>
+ServerName galere.se
+ServerAlias www.galere.se
+ServerAlias jonarius.galere.se
+ServerAlias jenkins.dev.galere.se
+DocumentRoot /var/www/galere
+RewriteEngine on
+RewriteCond %{SERVER_NAME} =www.galere.se [OR]
+RewriteCond %{SERVER_NAME} =galere.se [OR]
+RewriteCond %{SERVER_NAME} =jonarius.galere.se [OR]
+RewriteCond %{SERVER_NAME} =jenkins.dev.galere.se
+RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
+
+</VirtualHost>

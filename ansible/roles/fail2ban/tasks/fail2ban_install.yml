@@ -1,0 +1,9 @@
+- name: install fail2ban package
+  become: yes
+  apt: pkg=fail2ban state=present
+
+- name: copy fail2ban local config
+  file: 
+    src: jail.local 
+    dest: /etc/fail2ban/fail2ban.local owner=root group=root mode=0644
+  sudo: yes
