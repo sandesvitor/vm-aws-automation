@@ -1,0 +1,34 @@
+- name: write ssh_conf file
+  become: yes
+  copy:
+    src: sshd_config
+    dest: /etc/ssh/sshd_config
+    owner: root 
+    group: root 
+    mode: 0644
+  notify:
+  - restart sshd
+
+- name: Add primary user with primary group of 'admin'
+  become: yes
+  user:
+    name: '{{ primary_user }}'
+    shell: /bin/bash
+    group: admin
+    password: $6$/H/LDW1APV$qPpWKuVSS3qLawT21aDwiQoDLzPI4Zawr5PKnJc7vW1nkHyNDt5DlcrggE3DJg/YwdkjiswwJ2kQKN6mlkdbv/
+    state: present
+    system: no
+    createhome: yes
+    home: '{{ primary_user_home }}'
+
+- name: Add secondary user with a primary group 'admin'
+  become: yes
+  user:
+    name: '{{ secondary_user }}'
+    shell: /bin/bash
+    groups: admin
+    password: $6$/H/LDW1APV$qPpWKuVSS3qLawT21aDwiQoDLzPI4Zawr5PKnJc7vW1nkHyNDt5DlcrggE3DJg/YwdkjiswwJ2kQKN6mlkdbv/
+    state: present
+    system: no
+    createhome: yes
+    home: '{{ secondary_user_home }}'
