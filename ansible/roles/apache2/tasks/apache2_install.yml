@@ -10,12 +10,12 @@
 - name: write sites-available conf files (http)
   template:
     src: templates/galere.se.conf.j2
-    dest: /etc/apache2/sites-available/
+    dest: /etc/apache2/sites-available/galere.se.conf
 
 - name: write sites-available conf files (https)
   template:
     src: templates/galere.se-le-ssl.conf.j2
-    dest: /etc/apache2/sites-available/
+    dest: /etc/apache2/sites-available/galere.se-le-ssl.conf
 
 - name: write a basic index.html file
   template:

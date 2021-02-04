@@ -9,6 +9,14 @@
   notify:
   - restart sshd
 
+- name: install netstat
+  become: yes 
+  apt:
+    name: net-tools
+    update_cache: yes
+    state: latest
+
+
 - name: Add primary user with primary group of 'admin'
   become: yes
   user:
