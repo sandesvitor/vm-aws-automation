@@ -1,3 +1,3 @@
 output "name" {
-    value = security_group.ec2-sg.name
+    value = aws_security_group.ec2-sg.name
 }

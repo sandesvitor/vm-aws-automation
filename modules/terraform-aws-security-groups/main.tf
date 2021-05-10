@@ -1,5 +1,4 @@
 resource "aws_security_group" "ec2-sg" {
-    
     ingress {
         from_port = 0
         to_port = 0

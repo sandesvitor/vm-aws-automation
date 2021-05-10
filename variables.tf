@@ -1,11 +1,12 @@
 variable  "region" {
   type        = string
-  default     = "us-east-2"
+  default     = "sa-east-1"
   description = "AWS instance region"
 }
 
 variable "main_network_block" {
   type = string
+  default = "192.168.0.0/16"
 }
 
 variable "subnet_prefix_extension" {
@@ -54,4 +55,10 @@ variable  "ami" {
   type        = string
   description = "AMI of machine/Check with provider region for availability"
   default     = "05373777d08895384"
+}
+
+variable  "instance_type" {
+  type        = string
+  default     = "t2.micro"
+  description = "Type of instance/affects billing (t2.micro is currently the only free isntance in AWS)"
 }

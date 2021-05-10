@@ -22,5 +22,5 @@ module "ec2_instance" {
     source          = "./modules/terraform-aws-instance"
     ami             = var.ami 
     instance_type   = var.instance_type
-    security_groups = module.security_group.name
+    security_groups = [module.security_group.name]
 }
