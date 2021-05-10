@@ -1,6 +1,0 @@
----
-# handlers file for roles/sysadmin
-- name: restart sshd
-  service:
-    name: sshd
-    state: restarted

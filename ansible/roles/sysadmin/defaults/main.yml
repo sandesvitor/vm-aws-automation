@@ -1,7 +1,0 @@
----
-# defaults file for roles/sysadmin
-
-primary_user: 'sandesvitor'
-primary_user_home: '/home/sandesvitor'
-secondary_user: 'pim'
-secondary_user_home: '/home/pim'

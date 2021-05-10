@@ -1,3 +1,0 @@
----
-# tasks file for roles/sysadmin
-- include: system_init.yml
