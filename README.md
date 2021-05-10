@@ -1,11 +1,10 @@
 # AWS Instance Automation
 
-This is the configuration I use in mine I my website https://www.galere.se, using Apache/2.4.41 (Ubuntu).
+This is the configuration I use in my website https://www.galere.se, using Apache/2.4.41 (Ubuntu).
 
 ## **System Requirements**:
 
 - Terraform v0.14.5 ([Install Terraform](https://www.terraform.io/downloads.html))
-- Ansible 2.9.6 ([Install Ansible](https://www.terraform.io/downloads.html))
 
 Since I use AWS provider, we need the AWS CLI installed in our host machine the AWS command line interface to authenticate our account and to be able to create an EC2 Instance.
 
@@ -44,7 +43,7 @@ For my default region I set *us-east-1* and for default output format I set *Non
 It is important to remember that those keys will be stored in plain text in your user home directory, under ~/.aws/credentials. Maybe is a good idea to change permissions in the folder, with *sudo chmod 700 /home/$(YOUR_USER)/.aws*.
 
 
-## **Creating the EC2 Instance with Terraform**:
+## **Creating the Network and EC2 Instances with Terraform**:
 
 Now that our local machine have all the credential set up, we can initialize Terraform with this simple command:
 
@@ -64,48 +63,16 @@ This command will specify all the changes that your main.tf file will implement.
 After that, we only need to type the apply command:
 
 ```shell
-$ sudo terraform apply -auto-approve
+$ sudo terraform apply
 ```
 
 And Terraform will do all the work.
 
-### **Environment Varibles...**
-
-In you local machine you will have to have a *terraform.tfvars* in order to load all of you env variables to the main.tf file. Note that **object/hash table** variables should be writen as follows:
-
-```yml
-instance_tags = {
-    Name = "name"
-    Type = "type"
-}
-```
-
-## **Using Ansible to Configure Instance**:
-
-To check if ansible is working, *cd* to ansible folder and type the *ad hoc* command:
-
-```shell
-$ cd ansible
-$ sudo ansible all -i hosts -m command -a "hostname"
-The authenticity of host '3.140.250.42 (3.140.250.42)' can't be established.
-ECDSA key fingerprint is (...).
-Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
-3.140.250.42 | CHANGED | rc=0 >>
-ip-172-31-17-246
-```
-
-You should get your instance public IP in AWS EC2 Console, in the **Instance** section.
-
-Make sure to change you ansible.cfg file to match you needs, and run the playbook with all the roles:
-
-```shell
-$ sudo ansible-playbook -i hosts -K playbook.yml  
-```
 
 ## I don't like that, what should I do?
 
 Simple! Terraform is able to connect with your AWS account and destroy all the changes your plan has made.
 
 ```shell
-$ sudo terraform destroy -force
+$ sudo terraform destroy
 ```
