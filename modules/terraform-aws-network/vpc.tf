@@ -1,4 +1,4 @@
-resource "aws_vpc" "main" {
+resource "aws_vpc" "this" {
   cidr_block                       = var.main_network_block
   instance_tenancy                 = "default"
   enable_dns_hostnames             = true
@@ -6,6 +6,6 @@ resource "aws_vpc" "main" {
   assign_generated_ipv6_cidr_block = false
 
   tags = {
-    Name = "ec2-vpc"
+    Name = var.vpc_name_tag
   }
 }

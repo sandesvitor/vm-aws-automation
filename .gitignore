@@ -6,4 +6,4 @@ terraform.plan.out
 ansible/roles/fail2ban/files/jail.local
 ansible/roles/sysadmin/files/sshd_config
 ansible/roles/sysadmin/defaults/*
-terraform.tfstate*/
+./**/terraform.tfstate*/

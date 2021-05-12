@@ -5,3 +5,18 @@ variable "main_network_block" {
 variable "subnet_prefix_extension" {
   type = number
 }
+
+variable "vpc_name_tag" {
+  type    = string
+  default = "vpc_test" 
+}
+
+variable "internet_gateway_name_tag" {
+  type    = string
+  default = "internet_gateway_test" 
+}
+
+variable "route_table_name_tag" {
+  type    = string
+  default = "route_table_name_test" 
+}

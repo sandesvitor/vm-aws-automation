@@ -4,6 +4,22 @@ variable  "region" {
   description = "AWS instance region"
 }
 
+variable "vpc_name_tag" {
+  type    = string
+  default = "vpc_test" 
+}
+
+variable "internet_gateway_name_tag" {
+  type    = string
+  default = "internet_gateway_test" 
+}
+
+
+variable "route_table_name_tag" {
+  type    = string
+  default = "route_table_name_test" 
+}
+
 variable "main_network_block" {
   type = string
   default = "192.168.0.0/16"

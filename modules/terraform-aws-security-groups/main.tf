@@ -7,7 +7,7 @@ resource "aws_security_group" "ec2-sg" {
     }
     
     dynamic "ingress" {
-        for_each = var.ingresses
+        for_each = var.ingresses == null ? [] : var.ingresses
         content {
             from_port = ingress.value["from_port"]
             to_port = ingress.value["to_port"]
@@ -17,7 +17,7 @@ resource "aws_security_group" "ec2-sg" {
     }
     
     dynamic "egress" {
-        for_each = var.egresses
+        for_each = var.egresses == null ? [] : var.egresses
         content {
             from_port = egress.value["from_port"]
             to_port = egress.value["to_port"]

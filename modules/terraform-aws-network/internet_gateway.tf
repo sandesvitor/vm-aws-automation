@@ -1,7 +1,7 @@
 resource "aws_internet_gateway" "main" {
-  vpc_id = aws_vpc.main.id
+  vpc_id = aws_vpc.this.id
 
   tags = {
-    Name = "internet_gateway"
+    Name = var.internet_gateway_name_tag
   }
 }
