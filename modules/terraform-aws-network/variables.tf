@@ -25,3 +25,13 @@ variable "route_table_name_tag" {
   type    = string
   default = "route_table_name_test" 
 }
+
+variable "ingresses" {
+  type        = list(map(string))
+  default     = null
+}
+
+variable "egresses" {
+  type        = list(map(string))
+  default     = null
+}
