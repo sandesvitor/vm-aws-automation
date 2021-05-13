@@ -9,6 +9,11 @@ variable "vpc_name_tag" {
   default = "vpc_test" 
 }
 
+variable "subnet_name_tag" {
+  type    = string
+  default = "subnet_test" 
+}
+
 variable "internet_gateway_name_tag" {
   type    = string
   default = "internet_gateway_test" 
@@ -65,6 +70,11 @@ variable "egresses" {
           cidr_blocks = ["0.0.0.0/0"],
       }
   ]
+}
+
+variable  "ec2_name_tag" {
+  type        = string
+  default     = "ec2_name"
 }
 
 variable  "ami" {

@@ -10,6 +10,6 @@ resource "aws_subnet" "public" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name                                        = "public_subnet/${data.aws_availability_zones.available.names[count.index]}"
+    Name = "${var.subnet_name_tag}/${data.aws_availability_zones.available.names[count.index]}"
   }
 }

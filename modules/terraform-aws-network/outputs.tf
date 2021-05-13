@@ -13,9 +13,9 @@ output "vpc_cidr_block" {
   value       = concat(aws_vpc.this.*.cidr_block, [""])[0]
 }
 
-output "public_subnets" {
+output "public_subnets_id" {
   description = "Count of public subnets"
-  value       = length(aws_subnet.public)
+  value       = aws_subnet.public.*.id
 }
 
 output "public_subnets_cidr_blocks" {
