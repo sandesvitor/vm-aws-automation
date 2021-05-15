@@ -19,7 +19,7 @@ func TestAWSublicSubnetsUnit(t *testing.T) {
 	azs := aws.GetAvailabilityZones(t, awsRegion)
 
 	terraformOptions := &terraform.Options{
-		TerraformDir: "../modules/terraform-aws-network",
+		TerraformDir: "../../modules/terraform-aws-network",
 		Vars: map[string]interface{}{
 			"subnet_name_tag":         subnetBaseName,
 			"main_network_block":      "192.168.0.0/16",
