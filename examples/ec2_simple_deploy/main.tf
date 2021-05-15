@@ -1,12 +1,6 @@
 ##########################################################################
 ############################ VARIABLES ###################################
 
-variable  "ami" {
-  type        = string
-  description = "AMI of machine/Check with provider region for availability"
-  default     = "ami-079b1541b6dc958ca"
-}
-
 variable  "instance_type" {
   type        = string
   default     = "t2.micro"
@@ -23,6 +17,7 @@ variable  "ec2_name_tag" {
   type        = string
   default     = "ec2_name"
 }
+
 
 ##########################################################################
 ############################ MAIN MODULE #################################
@@ -53,7 +48,6 @@ module "ec2" {
     source                  = "../../modules/terraform-aws-ec2"
 
     ec2_name_tag            = var.ec2_name_tag
-    ami                     = var.ami
     instance_type           = var.instance_type
     subnet_ids              = module.network.public_subnets_id
 }

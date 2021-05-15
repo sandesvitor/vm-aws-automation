@@ -1,9 +1,3 @@
-variable  "ami" {
-  type        = string
-  description = "AMI of machine/Check with provider region for availability"
-  default     = "ami-079b1541b6dc958ca"
-}
-
 variable  "ec2_name_tag" {
   type        = string
   default     = "ec2_name"
