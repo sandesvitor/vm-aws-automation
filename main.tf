@@ -13,7 +13,7 @@ module "network" {
 }
 
 module "ec2_instance" {
-  source                  = "./modules/terraform-aws-ec2"
-  instance_type           = var.instance_type
-  subnet_ids              = module.network.public_subnets_id
+  source        = "./modules/terraform-aws-ec2"
+  instance_type = var.instance_type
+  subnet_ids    = module.network.public_subnets_id
 }
