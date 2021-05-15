@@ -5,6 +5,7 @@ on:
     branches:
       - master
       - develop
+      - pipeline_sandbox
   pull_request:
     branches:
       - master
