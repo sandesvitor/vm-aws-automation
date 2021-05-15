@@ -28,3 +28,6 @@ jobs:
 
       - name: Run testing
         run: go test -v -count=1 -timeout 30m -p 1 ./test/unit/
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
