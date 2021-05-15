@@ -1,28 +1,23 @@
 ##########################################################################
 ############################ VARIABLES ###################################
 
-variable  "ami" {
-  type        = string
-  description = "AMI of machine/Check with provider region for availability"
-  default     = "ami-079b1541b6dc958ca"
-}
-
-variable  "instance_type" {
+variable "instance_type" {
   type        = string
   default     = "t2.micro"
   description = "Type of instance/affects billing (t2.micro is currently the only free isntance in AWS)"
 }
 
-variable  "region" {
+variable "region" {
   type        = string
   default     = "sa-east-1"
   description = "AWS instance region"
 }
 
-variable  "ec2_name_tag" {
-  type        = string
-  default     = "ec2_name"
+variable "ec2_name_tag" {
+  type    = string
+  default = "ec2_name"
 }
+
 
 ##########################################################################
 ############################ MAIN MODULE #################################
@@ -32,30 +27,29 @@ terraform {
 }
 
 provider "aws" {
-    region = var.region
+  region = var.region
 }
 
 module "network" {
-    source                  = "../../modules/terraform-aws-network"
-    main_network_block      = "192.168.0.0/16"
-    subnet_prefix_extension = 4
-    ingresses               = [
-        {
-            from_port   = 8080
-            to_port     = 8080
-            protocol    = "tcp"
-            cidr_blocks = "0.0.0.0/0"
-        }
-    ]
+  source                  = "../../modules/terraform-aws-network"
+  main_network_block      = "192.168.0.0/16"
+  subnet_prefix_extension = 4
+  ingresses = [
+    {
+      from_port   = 8080
+      to_port     = 8080
+      protocol    = "tcp"
+      cidr_blocks = "0.0.0.0/0"
+    }
+  ]
 }
 
 module "ec2" {
-    source                  = "../../modules/terraform-aws-ec2"
+  source = "../../modules/terraform-aws-ec2"
 
-    ec2_name_tag            = var.ec2_name_tag
-    ami                     = var.ami
-    instance_type           = var.instance_type
-    subnet_ids              = module.network.public_subnets_id
+  ec2_name_tag  = var.ec2_name_tag
+  instance_type = var.instance_type
+  subnet_ids    = module.network.public_subnets_id
 }
 
 
@@ -63,13 +57,13 @@ module "ec2" {
 ############################ OUTPUTS #####################################
 
 output "public_ips" {
-    value = module.ec2.public_ips
+  value = module.ec2.public_ips
 }
 
 output "state" {
-    value = module.ec2.state
+  value = module.ec2.state
 }
 
 output "id" {
-    value = module.ec2.id
+  value = module.ec2.id
 }

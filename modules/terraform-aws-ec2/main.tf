@@ -19,20 +19,20 @@ data "aws_ami" "ubuntu" {
 }
 
 resource "aws_instance" "ec2" {
-    count           = length(data.aws_availability_zones.available.names)
-    subnet_id       = var.subnet_ids[count.index]
+  count     = length(data.aws_availability_zones.available.names)
+  subnet_id = var.subnet_ids[count.index]
 
-    ami             = data.aws_ami.ubuntu.id
-    instance_type   = var.instance_type
-    security_groups = var.security_groups
+  ami             = data.aws_ami.ubuntu.id
+  instance_type   = var.instance_type
+  security_groups = var.security_groups
 
-    user_data = <<EOF
+  user_data = <<EOF
 #!/bin/bash
 echo "Hello, World!" > index.html
 nohup busybox httpd -f -p 8080 &
 EOF
 
-    tags = {
+  tags = {
     Name = "${var.ec2_name_tag}/${data.aws_availability_zones.available.names[count.index]}"
   }
 }
