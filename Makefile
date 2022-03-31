@@ -1,6 +1,8 @@
 .PHONY: get-deps
 get-deps:
+	@echo "##############################################################"
 	@echo "Getting test deps"
+	@echo "##############################################################"
 	@echo ""
 	@echo ""
 	go get github.com/gruntwork-io/terratest/modules/terraform
@@ -13,7 +15,11 @@ get-deps:
 
 .PHONY: test
 test:
+	@echo ""
+	@echo ""
+	@echo "##############################################################"
 	@echo "Running Terrates suit"
+	@echo "##############################################################"
 	@echo ""
 	@echo ""
 	go test -v -count=1 -timeout 30m -parallel 10 ./test/unit/
