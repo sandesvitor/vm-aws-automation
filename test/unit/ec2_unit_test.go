@@ -3,14 +3,11 @@ package test
 import (
 	"fmt"
 	"testing"
-	"time"
 
 	"github.com/gruntwork-io/terratest/modules/aws"
 	"github.com/gruntwork-io/terratest/modules/random"
 	"github.com/gruntwork-io/terratest/modules/terraform"
 	"github.com/stretchr/testify/assert"
-
-	http_helper "github.com/gruntwork-io/terratest/modules/http-helper"
 )
 
 func TestAWSEC2Unit(t *testing.T) {
@@ -36,19 +33,8 @@ func TestAWSEC2Unit(t *testing.T) {
 	terraform.InitAndApply(t, terraformOptions)
 
 	instancesStates := terraform.OutputList(t, terraformOptions, "state")
-	publicIps := terraform.OutputList(t, terraformOptions, "public_ips")
 
 	for _, state := range instancesStates {
 		assert.Equal(t, "running", state)
-	}
-
-	for _, ip := range publicIps {
-		url := fmt.Sprintf("http://%s:8080", ip)
-		http_helper.HttpGetWithRetry(t, url, nil, 200, "Hello, World!", 30, 10*time.Second)
-	}
-
-	for _, ip := range publicIps {
-		url := fmt.Sprintf("http://%s:8080", ip)
-		http_helper.HttpGetWithValidation(t, url, nil, 200, "Hello, World!")
 	}
 }

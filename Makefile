@@ -18,7 +18,7 @@ test:
 	@echo ""
 	@echo ""
 	@echo "##############################################################"
-	@echo "Running Terrates suit"
+	@echo "Running Terratest tests suit"
 	@echo "##############################################################"
 	@echo ""
 	@echo ""
