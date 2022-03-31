@@ -9,7 +9,7 @@ variable "instance_type" {
 
 variable "region" {
   type        = string
-  default     = "sa-east-1"
+  default     = "us-east-1"
   description = "AWS instance region"
 }
 

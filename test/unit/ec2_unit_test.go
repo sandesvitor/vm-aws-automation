@@ -17,7 +17,7 @@ func TestAWSEC2Unit(t *testing.T) {
 	uniqueId := random.UniqueId()
 	EC2Name := fmt.Sprintf("%s", uniqueId)
 
-	awsRegion := "sa-east-1"
+	awsRegion := "us-east-1"
 	instanceType := aws.GetRecommendedInstanceType(t, awsRegion, []string{"t2.micro", "t3.micro"})
 
 	terraformOptions := &terraform.Options{
