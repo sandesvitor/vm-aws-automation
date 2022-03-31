@@ -9,7 +9,7 @@ on:
 
 jobs:
   test:
-      name: "Tests"
+      name: "Terratest"
       runs-on: ubuntu-latest
       steps:
 
@@ -20,14 +20,16 @@ jobs:
           uses: actions/setup-go@v2
 
         - name: Run testing
-          run: go test -v -count=1 -timeout 30m -p 1 ./test/unit/
+          run: make build-and-test
           env:
             AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
             AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
   
   deploy:
-    needs: test
-    name: "Terraform"
+    name: "Terraform Deploy"
+    needs: [test]
+    environment:
+      name: production
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -36,8 +38,7 @@ jobs:
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          # terraform_version: 0.13.0:
-          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+          terraform_version: 0.14.8:
 
       - name: Terraform Format
         id: fmt
@@ -74,6 +75,7 @@ jobs:
               repo: context.repo.repo,
               body: output
             })
+
       - name: Terraform Plan Status
         if: steps.plan.outcome == 'failure'
         run: exit 1

@@ -1,9 +1,7 @@
 terraform {
-  backend "remote" {
-    organization = "sandesvitor"
-
-    workspaces {
-      name = "aws-infrastructure-dixit"
-    }
+  backend "s3" {
+    bucket = "infra-state-bucket-b477ff"
+    key    = "terraform.tfstate"
+    region = "us-east-1"
   }
 }
