@@ -15,7 +15,7 @@ func TestAWSublicSubnetsUnit(t *testing.T) {
 	uniqueId := random.UniqueId()
 	subnetBaseName := fmt.Sprintf("subnet_testing-%s", uniqueId)
 
-	awsRegion := aws.GetRandomStableRegion(t, nil, nil)
+	awsRegion := "us-east-1"
 	azs := aws.GetAvailabilityZones(t, awsRegion)
 
 	terraformOptions := &terraform.Options{

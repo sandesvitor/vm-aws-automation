@@ -7,6 +7,10 @@ on:
     paths:
       - ./modules/*
 
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+
 jobs:
   test:
       name: "Tests"
@@ -20,9 +24,4 @@ jobs:
           uses: actions/setup-go@v2
 
         - name: Run testing
-          run: make build-and-test
-          env:
-            AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-            AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  
- 
+          run: make build-and-test 
