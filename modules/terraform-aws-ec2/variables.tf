@@ -17,3 +17,8 @@ variable "security_groups" {
   type    = list(string)
   default = []
 }
+
+variable "user_data" {
+  type    = string
+  default = null
+}

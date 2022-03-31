@@ -9,7 +9,7 @@ variable "instance_type" {
 
 variable "region" {
   type        = string
-  default     = "sa-east-1"
+  default     = "us-east-1"
   description = "AWS instance region"
 }
 
@@ -39,7 +39,34 @@ module "network" {
       from_port   = 8080
       to_port     = 8080
       protocol    = "tcp"
-      cidr_blocks = "0.0.0.0/0"
+      cidr_blocks = ["0.0.0.0/0"]
+    },
+    {
+      from_port   = 80
+      to_port     = 80
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    },
+    {
+      from_port   = 443
+      to_port     = 443
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    },
+    {
+      from_port   = 22
+      to_port     = 22
+      protocol    = "tcp"
+      cidr_blocks = ["0.0.0.0/0"]
+    },
+  ]
+
+  egresses = [
+    {
+      from_port   = 0
+      to_port     = 0
+      protocol    = "-1"
+      cidr_blocks = ["0.0.0.0/0"]
     }
   ]
 }
@@ -50,6 +77,11 @@ module "ec2" {
   ec2_name_tag  = var.ec2_name_tag
   instance_type = var.instance_type
   subnet_ids    = module.network.public_subnets_id
+  user_data     = <<EOF
+                  #!/bin/bash
+                  echo "Hello, World!" > index.html
+                  nohup busybox httpd -f -p 8080 &
+                  EOF
 }
 
 

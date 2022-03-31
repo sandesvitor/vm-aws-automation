@@ -26,11 +26,7 @@ resource "aws_instance" "ec2" {
   instance_type   = var.instance_type
   security_groups = var.security_groups
 
-  user_data = <<EOF
-#!/bin/bash
-echo "Hello, World!" > index.html
-nohup busybox httpd -f -p 8080 &
-EOF
+  user_data = var.user_data
 
   tags = {
     Name = "${var.ec2_name_tag}/${data.aws_availability_zones.available.names[count.index]}"
