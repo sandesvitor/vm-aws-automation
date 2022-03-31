@@ -42,7 +42,7 @@ func TestAWSEC2Unit(t *testing.T) {
 
 	for _, ip := range publicIps {
 		url := fmt.Sprintf("http://%s:8080", ip)
-		http_helper.HttpGetWithRetry(t, url, nil, 200, "Hello, World!", 30, 5*time.Second)
+		http_helper.HttpGetWithRetry(t, url, nil, 200, "Hello, World!", 60, 10*time.Second)
 	}
 
 	for _, ip := range publicIps {
