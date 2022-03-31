@@ -50,7 +50,7 @@ module "ec2" {
   ec2_name_tag  = var.ec2_name_tag
   instance_type = var.instance_type
   subnet_ids    = module.network.public_subnets_id
-  user_Data     = <<EOF
+  user_data     = <<EOF
     #!/bin/bash
     echo "Hello, World!" > index.html
     nohup busybox httpd -f -p 8080 &
