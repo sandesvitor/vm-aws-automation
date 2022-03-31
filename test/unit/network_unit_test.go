@@ -12,6 +12,8 @@ import (
 )
 
 func TestAWSublicSubnetsUnit(t *testing.T) {
+	t.Parallel()
+
 	uniqueId := random.UniqueId()
 	subnetBaseName := fmt.Sprintf("subnet_testing-%s", uniqueId)
 

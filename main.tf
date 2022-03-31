@@ -9,7 +9,7 @@ provider "aws" {
 module "network" {
   source                  = "./modules/terraform-aws-network"
   main_network_block      = "192.168.0.0/16"
-  subnet_prefix_extension = 8
+  subnet_prefix_extension = 4
 
   # Default security group rules:
   ingresses = [
