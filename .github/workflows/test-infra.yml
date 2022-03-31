@@ -5,9 +5,9 @@ on:
     branches:
       - master
     paths:
-      - ./modules/*
-      - ./test/*
-      - ./examples/*
+      - "modules/**"
+      - "test/**"
+      - "examples/**"
 
 env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
